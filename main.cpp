@@ -2,11 +2,18 @@
 #include "BarcodeItem.h"
 #include <string>
 #include <fstream>
-#include <time>
+#include <time.h>
 #include <iostream>
-
+/****************************************************************
+ * Author: Joshua Standerfer					*
+ * Date: 12-3-18						*
+ * Desc: This is the main method which tests the time take	*
+ *  for a hash table to allocate and then find 			*
+ * a key value pair of UPC items.				*
+ * *************************************************************/
 using namespace std;
 int main() {
+	cout<<"test"<<endl;
 	clock_t t;
 	t = clock();
 	string code;
@@ -21,7 +28,8 @@ int main() {
 	getline(aFile, dummy);
 
 	HashSC<BarcodeItem> hashTable(1000);
-
+	cout<<"test";
+	cin>>dummy;
 	int i = 0;
 	int j = 10;
 	//change j to the any int to limit the number of items in the tree
@@ -36,10 +44,10 @@ int main() {
 
 		BarcodeItem item(code, info);
 		hashTable.insertItem(item.getKey(), item);
+		i++;
 	}
 	cout<<"Enter UPC Code: ";
 	string key;
-	string dummy;
 	cin >> key;
 	//create a dummy barcode item to compare in the list
 	BarcodeItem temp(key, dummy);
