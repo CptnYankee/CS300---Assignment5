@@ -10,7 +10,7 @@
 *Desc: HashSC is a generic class with creates a hashed table with seperate chaining. It can handle
 *keys up to size unsigned long long. 
 */
-
+using namespace std;
 template <class T>
 class HashSC{
 	//No. of spots a linked list will inhabit
@@ -23,11 +23,11 @@ public:
 	//Constructor
 	HashSC(int);
 
-	int hasher(unsigned long long int key);
+	int hasher(unsigned long long int);
 
-	void insertItem(unsigned long long int key, T&);
+	void insertItem(unsigned long long int, T&);
 
-	void deleteItem(unsigned long long int key, T&);
+	void deleteItem(unsigned long long int, T&);
 
 	void find(T&);
 
@@ -56,10 +56,9 @@ inline void HashSC<T>::insertItem(unsigned long long key,T &item){
 
 template <class T>
 void HashSC<T>::deleteItem(unsigned long long int key, T &item) {
-	unsigned long long int key;
 	int index = hasher(key);
 	//need to look through list. Iteration
-	list<T> ::iterator n;
+	typename list<T> ::iterator n;
 	for (n = table[index].begin(); n != table[index].end(); n++) {
 		if (*n == item)
 			break;
@@ -72,16 +71,17 @@ template <class T>
 void HashSC<T>::find(T& item) {
 	unsigned long long int key;
 	int index = hasher(key);
-	list<T>::iterator n;
+	typename list<T>::iterator n;
 	for (n = table[index].begin(); n != table[index].end(); n++) {
 		if (*n == item) {
 			cout << item;
+			break;
 		}
 	}
 }
 template <class T>
 void HashSC<T>::destroyTable() {
-	for int(i = 0; i < bucket; i++)
+	for (int i = 0; i < bucket; i++)
 		//unsure if <list> will automatically handle this when table is deleted or not
 		table[i].~list();
 	delete[] table;
